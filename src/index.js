@@ -26,23 +26,51 @@ function createBinaryNumber({isStrict = true, str, length = str.length}) {
     // TODO make isStrict work
 
     add({value}) {
-      let result = "";
-      return createBinaryNumber({str: result});
+      let copiedValue = createBitUnitsFromString(this.toString());
+      let result = createBitUnitsFromString(createZeroBitUnits(copiedValue));
+      // 0 + 0 = 0
+      // 0 + 1 = 1
+      // 1 + 0 = 1
+      // 1 + 1 = 0 carry 1
+      return createBinaryNumber({isStrict: this.isStrict, str: arrayToString(result)});
     },
 
     and({value}) {
-      let result = "";
-      return createBinaryNumber({str: result});
+      let copiedValue = createBitUnitsFromString(this.toString());
+      // initialize an all 0 BitUnits
+      let result = createBitUnitsFromString(createZeroBitUnits(copiedValue));
+      // if both bits in the compared position are 1,
+      // the bit in the resulting binary representation is 1,
+      // otherwise it's 0
+      for (let i = 0; i < copiedValue.length; ++i) {
+        if (copiedValue[i].state === 1 && value[i] === 1)
+          result[i].flip();
+      } // TODO consider when not same length
+      return createBinaryNumber({isStrict: this.isStrict, str: arrayToString(result)});
     },
 
     or({value}) {
-      let result = "";
-      return createBinaryNumber({str: result});
+      let copiedValue = createBitUnitsFromString(this.toString());
+      let result = createBitUnitsFromString(createZeroBitUnits(copiedValue));
+      // if not both bits are 0, the result is 1.
+      for (let i = 0; i < copiedValue.length; ++i) {
+        if (!(copiedValue[i].state === 0 && value[i] === 0)) {
+          result[i].flip();
+        }
+      } // TODO consider when not same length
+      return createBinaryNumber({isStrict: this.isStrict, str: arrayToString(result)});
     },
 
     xor({value}) {
-      let result = "";
-      return createBinaryNumber({str: result});
+      let copiedValue = createBitUnitsFromString(this.toString());
+      let result = createBitUnitsFromString(createZeroBitUnits(copiedValue));
+      // 1 if the two bits are different, and 0 if they are the same.
+      for (let i = 0; i < copiedValue.length; ++i) {
+        if (!(copiedValue[i].state === value[i])) {
+          result[i].flip();
+        }
+      } // TODO consider when not same length
+      return createBinaryNumber({isStrict: this.isStrict, str: arrayToString(result)});
     },
 
     // 1's complement
@@ -51,7 +79,7 @@ function createBinaryNumber({isStrict = true, str, length = str.length}) {
       for (let i = 0; i < copiedValue.length; ++i) {
         copiedValue[i].flip();
       }
-      return createBinaryNumber(arrayToString(copiedValue));
+      return createBinaryNumber({isStrict: this.isStrict, str: arrayToString(copiedValue)});
     },
 
     // rotate with carry to the right
@@ -61,7 +89,7 @@ function createBinaryNumber({isStrict = true, str, length = str.length}) {
       copiedValue.pop();
       copiedValue.unshift(originalLastBit);
       // console.log(arrayToString(copiedValue));
-      return createBinaryNumber(arrayToString(copiedValue));
+      return createBinaryNumber({isStrict: this.isStrict, str: arrayToString(copiedValue)});
     },
 
     idle() {
@@ -95,6 +123,15 @@ function arrayToString(arr = []) {
   }
   return output;
 }
+
+function createZeroBitUnits(value = []) {
+  let zeroStr = "";
+  for (let i = 0; i < value.length; ++i) {
+    zeroStr = 0 + zeroStr;
+  }
+  return zeroStr;
+}
+
 
 function createBitUnit(initialState = 0) {
   return {
