@@ -8,14 +8,15 @@ function createBinaryNumber({isStrict = true, str, length = str.length}) {
     value: createBitUnitsFromString(assureLength(str, length)),
 
     toString(format = "empty") {
+      let binaryOutput = arrayToString(this.value);
       switch (format) {
         case "empty":
         case 2:
-          return this.str;
+          return binaryOutput;
         case 16:
-          return "0x" + parseInt(this.str, 2).toString(16);
+          return "0x" + parseInt(binaryOutput, 2).toString(16);
         case 10:
-          return parseInt(this.str, 2).toString(10);
+          return parseInt(binaryOutput, 2).toString(10);
         default:
           return "This is not working LOL your format argument is illegal!"
       }
@@ -44,25 +45,23 @@ function createBinaryNumber({isStrict = true, str, length = str.length}) {
       return createBinaryNumber({str: result});
     },
 
-    // fixme BUG after operation, only value field is changed, other properties are not...
-
     // 1's complement
     not() {
-      let result = cloneBinaryNumber(this);
-      for (let i = 0; i < result.value.length; ++i) {
-        result.value[i].flip();
+      let copiedValue = createBitUnitsFromString(this.toString());
+      for (let i = 0; i < copiedValue.length; ++i) {
+        copiedValue[i].flip();
       }
-      return result;
+      return createBinaryNumber(arrayToString(copiedValue));
     },
 
     // rotate with carry to the right
     rcr() {
-      let result = cloneBinaryNumber(this);
-      let originalLastBit = result.value[result.value.length - 1];
-      result.value.pop();
-      result.value.unshift(originalLastBit);
-      // console.log(result.value);
-      return result;
+      let copiedValue = createBitUnitsFromString(this.toString());
+      let originalLastBit = copiedValue[copiedValue.length - 1];
+      copiedValue.pop();
+      copiedValue.unshift(originalLastBit);
+      // console.log(arrayToString(copiedValue));
+      return createBinaryNumber(arrayToString(copiedValue));
     },
 
     idle() {
@@ -70,10 +69,6 @@ function createBinaryNumber({isStrict = true, str, length = str.length}) {
     }
   }
 }
-
-const cloneBinaryNumber = (oldBinaryNumber = {}) => {
-  return createBinaryNumber(oldBinaryNumber);
-};
 
 // if given length is smaller than actual length, this function will do nothing
 const assureLength = (str = "", length = str.length) => {
@@ -93,6 +88,14 @@ const createBitUnitsFromString = (str = "") => {
   return bitUnits;
 };
 
+function arrayToString(arr = []) {
+  let output = "";
+  for (let i = 0; i < arr.length; ++i) {
+    output = output + arr[i].toString();
+  }
+  return output;
+}
+
 function createBitUnit(initialState = 0) {
   return {
     state: initialState,
@@ -100,6 +103,10 @@ function createBitUnit(initialState = 0) {
       if (this.state === 0) {
         return createBitUnit(1);
       } else return createBitUnit(0);
+    },
+
+    toString() {
+      return this.state;
     }
   }
 }
