@@ -78,6 +78,9 @@ function addOperation(left = [], right = [], width = left.length) {
   }
 
   // FIXME this code below breaks due to recursive call! Too sleepy to figure it out now...
+
+  // FIXME idea: get rid of recursion, use a loop to do math and check isZero.
+
   // check if the carry array is all zero to determine operation's completion
   if (!isZero(carryArr)) {
     tempArr.unshift(false); // align two arrays
