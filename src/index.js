@@ -57,43 +57,37 @@ function isZero(arr) { // check if the array is all 0/false
   return true;
 }
 
-function addOperation(left = [], right = [], width = left.length) {
+function addOperation(left = [], right = []) {
   if (left.length !== right.length) {
     throw (new Error("Bitwise ADD can only be performed on 2 operands with same length"));
   }
-  let tempArr = [];
-  let carryArr = [false]; // preset the right most "digit" to 0/false
+  let tempArr;
+  let carryArr;
+  const width = left.length;
 
-  for (let i = left.length - 1; i >= 0; --i) { // validate from right to left
-    if (left[i] && right[i]) { // 1 + 1 = 0 carry 1
-      tempArr.unshift(false);
-      carryArr.unshift(true);
-    } else if (!left[i] && !right[i]) { // 0 + 0 = 0 carry 0
-      tempArr.unshift(false);
-      carryArr.unshift(false);
-    } else { // 1 + 0 = 1; 0 + 1 = 1 ===> carry 0
-      tempArr.unshift(true);
-      carryArr.unshift(false);
+  // the operation completes when the right operand (the carry array) is zero
+  while (!isZero(right)) {
+    tempArr = [];
+    carryArr = [false];  // preset the right most bit to 0/false
+    for (let i = left.length - 1; i >= 0; --i) { // validate from right to left
+      if (left[i] && right[i]) { // 1 + 1 = 0 carry 1
+        tempArr.unshift(false);
+        carryArr.unshift(true);
+      } else if (!left[i] && !right[i]) { // 0 + 0 = 0 carry 0
+        tempArr.unshift(false);
+        carryArr.unshift(false);
+      } else { // 1 + 0 = 1; 0 + 1 = 1 ===> carry 0
+        tempArr.unshift(true);
+        carryArr.unshift(false);
+      }
     }
+
+    left = tempArr.unshift(false);
+    right = carryArr;
   }
 
-  // FIXME this code below breaks due to recursive call! Too sleepy to figure it out now...
-
-  // FIXME idea: get rid of recursion, use a loop to do math and check isZero.
-
-  // check if the carry array is all zero to determine operation's completion
-  if (!isZero(carryArr)) {
-    tempArr.unshift(false); // align two arrays
-    addOperation(tempArr, carryArr, width);
-  } else {
-    return format(tempArr, width);
-  }
+  return format(left, width); // reformat array to original size - trim the extra unnecessary bits
 }
-
-console.log(
-  addOperation([false, true, false, false, false, true, false, false],
-    [true, true, false, true, true, true, false, true])
-);
 
 function andOperation(left = [], right = []) {
   if (left.length !== right.length) {
