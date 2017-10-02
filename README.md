@@ -2,7 +2,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-BitFriendly makes it easier to work with bitwise operations or bit shifts in Javascript on arbitrarily sized binary numbers, allowing more freedom than the built-in [32-bit numbers](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Bitwise_Operatoren) for fun and profit. ;)
+BitFriendly makes it easier to work with bitwise operations or bit shifts in Javascript on arbitrarily
+sized binary numbers, allowing more freedom than the built-in
+[32-bit numbers](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Bitwise_Operatoren)
+for fun and profit. ;)
 
 ## Installation
 
@@ -18,7 +21,8 @@ To install BitFriendly temporarily and not add it to the dependencies list:
 $ npm install bitfriendly --no-save
 ```
 
-You can also download the latest [zip file](https://github.com/hexrcs/BitFriendly/archive/master.zip) or copy and use the [Javascript file](https://github.com/hexrcs/BitFriendly/raw/master/src/index.js) directly.
+You can also download the latest [zip file](https://github.com/hexrcs/BitFriendly/archive/master.zip)
+or copy and use the [Javascript file](https://github.com/hexrcs/BitFriendly/raw/master/src/index.js) directly.
 
 ## Features
 
@@ -40,6 +44,8 @@ console.log(binaryNumberFromString);
 
 const binaryNumberFromMixedArray = lib.bitArray([1, false, false, true, "0", 1]);
 console.log(binaryNumberFromMixedArray);
+
+console.log(lib.operate(binaryNumberFromString).eql(binaryNumberFromMixedArray).toString());
 
 // We can also alias the function for cleaner code
 const bin = lib.bitArray;
@@ -64,11 +70,19 @@ console.log(thenXorB.toString());
   
 ## Why Create BitFriendly?
 
-It's fun to explore the binary world. BitFriendly utilizes Javascript arrays and booleans instead of real Javascript binary numbers, so it's not speedy at all, but it's much more flexible. BitFriendly is created for my own need for implementing a Javascript simulator of the Minimal Machine (MIMA) (see [MIMA Aufgaben](http://ti.ira.uka.de/Visualisierungen/Mima/mima-aufgaben.pdf) and [MIMA Simulator](http://ti.ira.uka.de/Visualisierungen/Mima/)), which is used in the [computer engineering lectures](http://ti.itec.uka.de/) at [Karlsruhe Institute of Technology](http://www.kit.edu/).
+It's fun to explore the binary world. BitFriendly utilizes Javascript arrays and booleans instead
+of real Javascript binary numbers, so it's not speedy at all, but it's much more flexible.
+BitFriendly is created for my own need for implementing a Javascript simulator of the Minimal
+Machine (MIMA) (see [MIMA Aufgaben](http://ti.ira.uka.de/Visualisierungen/Mima/mima-aufgaben.pdf)
+and [MIMA Simulator](http://ti.ira.uka.de/Visualisierungen/Mima/)), which is used in the [computer
+engineering lectures](http://ti.itec.uka.de/) at [Karlsruhe Institute of Technology](http://www.kit.edu/).
 
 ## Project Status
 
-The initial version of BitFriendly supports these operations - AND, OR, XOR, NOT and ADD, as well as one kind of bit shift RCR (Rotate with Carry to the Right). More algorithmic operators like minus and division, also more bit shift options are on my upcoming feature list. More interaction friendly toString or toInt functions are coming too.
+The current version of BitFriendly supports these operations - AND, OR, XOR, NOT, EQL and ADD, as
+well as one kind of bit shift RCR (Rotate with Carry to the Right). There will also be more
+algorithmic operators like subtraction and division, together with more bit shift options. More
+interaction friendly toString and toInt functions are coming too.
 
 ## License
 

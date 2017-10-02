@@ -42,6 +42,11 @@ function operate(arr = []) {
   return {
     left: arr,
 
+    eql(right = []) {
+      let result = eqlOperation(this.left, right);
+      return operate(result);
+    },
+
     and(right = []) {
       let result = andOperation(this.left, right);
       return operate(result);
@@ -93,6 +98,26 @@ function isZero(arr) { // check if the array is all 0/false
     }
   }
   return true;
+}
+
+function eqlOperation(left = [], right = []) {
+  if (left.length !== right.length) {
+    throw (new Error("Bitwise EQL can only be performed on 2 operands with same length"));
+  }
+  let isEqual = true;
+  for (let i = 0; i < left.length; i++) {
+    if (left[i] !== right[i]) {
+      isEqual = false;
+      break;
+    }
+  }
+
+  // return -1 in two's complement if same, return 0 if not
+  if (isEqual) {
+    return new Array(left.length).fill(true);
+  } else {
+    return new Array(left.length).fill(false);
+  }
 }
 
 function addOperation(left = [], right = []) {
