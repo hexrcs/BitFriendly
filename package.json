@@ -1,6 +1,6 @@
 {
   "name": "bitfriendly",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Customizable binary format with bitwise operations",
   "main": "src/index.js",
   "scripts": {
