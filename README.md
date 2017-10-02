@@ -1,6 +1,6 @@
 # BitFriendly
 
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/hexrcs/BitFriendly/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 BitFriendly makes it easier to work with bitwise operations or bit shifts in Javascript on arbitrarily sized binary numbers, allowing more freedom than the built-in [32-bit numbers](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Bitwise_Operatoren) for fun and profit. ;)
 
@@ -72,4 +72,4 @@ The initial version of BitFriendly supports these operations - AND, OR, XOR, NOT
 
 ## License
 
-BitFriendly is distributed under the MIT License. For more information, read the file [LICENSE](LICENSE)
+BitFriendly is distributed under the MIT License. For more information, read the file [LICENSE](LICENSE).
