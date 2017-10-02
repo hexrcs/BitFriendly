@@ -82,11 +82,12 @@ function addOperation(left = [], right = []) {
       }
     }
 
-    left = tempArr.unshift(false);
-    right = carryArr;
+    left = tempArr;
+    // reformat carry array to original size - trim the extra unnecessary left-most bit
+    right = format(carryArr, width);
   }
 
-  return format(left, width); // reformat array to original size - trim the extra unnecessary bits
+  return left;
 }
 
 function andOperation(left = [], right = []) {
