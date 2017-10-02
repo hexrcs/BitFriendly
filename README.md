@@ -35,10 +35,10 @@ You can also download the latest [zip file](https://github.com/hexrcs/BitFriendl
 const lib = require("./src/index.js");
 
 // Pure strings and arrays of mixed 1, 0, true, false are allowed for constructor
-let binaryNumberFromString = lib.bitArray("100101");
+const binaryNumberFromString = lib.bitArray("100101");
 console.log(binaryNumberFromString);
 
-let binaryNumberFromMixedArray = lib.bitArray([1, false, false, true, "0", 1]);
+const binaryNumberFromMixedArray = lib.bitArray([1, false, false, true, "0", 1]);
 console.log(binaryNumberFromMixedArray);
 
 // We can also alias the function for cleaner code
@@ -64,7 +64,7 @@ console.log(thenXorB.toString());
   
 ## Why Create BitFriendly?
 
-It's fun to explore the binary world. BitFriendly utilizes Javascript arrays and booleans instead of real Javascript binary numbers, so it's not speedy at all, but it's much more flexible. BitFriendly is created for my own need when implementing a Javascript simulator of the Minimal Machine (MIMA) (see [MIMA Aufgaben](http://ti.ira.uka.de/Visualisierungen/Mima/mima-aufgaben.pdf) and [MIMA Simulator](http://ti.ira.uka.de/Visualisierungen/Mima/), which is used in the [computer engineering lectures](http://ti.itec.uka.de/) at [Karlsruhe Institute of Technology](http://www.kit.edu/).
+It's fun to explore the binary world. BitFriendly utilizes Javascript arrays and booleans instead of real Javascript binary numbers, so it's not speedy at all, but it's much more flexible. BitFriendly is created for my own need for implementing a Javascript simulator of the Minimal Machine (MIMA) (see [MIMA Aufgaben](http://ti.ira.uka.de/Visualisierungen/Mima/mima-aufgaben.pdf) and [MIMA Simulator](http://ti.ira.uka.de/Visualisierungen/Mima/)), which is used in the [computer engineering lectures](http://ti.itec.uka.de/) at [Karlsruhe Institute of Technology](http://www.kit.edu/).
 
 ## Project Status
 
