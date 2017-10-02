@@ -1,3 +1,5 @@
+module.exports = {operate, bitArray};
+
 function bitUnit(val) {
   switch (val) {
     case 1:
@@ -68,6 +70,18 @@ function operate(arr = []) {
     rcr() {
       let result = rcrOperation(this.left);
       return operate(result);
+    },
+
+    toString() {
+      let output = "";
+      for (let val of this.left) {
+        if (val) {
+          output = output + "1";
+        } else {
+          output = output + "0";
+        }
+      }
+      return output;
     }
   }
 }
