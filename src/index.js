@@ -36,14 +36,38 @@ function format(arr = [], width = arr.length) {
   return arr;
 }
 
-function operate(arr = [], width = arr.length, altWidth = width) {
+function operate(arr = []) {
   return {
-    realArr: arr,
-    formattedArr: format(arr, width),
-    altFormattedArr: format(arr, altWidth),
+    left: arr,
 
     and(right = []) {
+      let result = andOperation(this.left, right);
+      return operate(result);
+    },
 
+    add(right = []) {
+      let result = addOperation(this.left, right);
+      return operate(result);
+    },
+
+    or(right = []) {
+      let result = orOperation(this.left, right);
+      return operate(result);
+    },
+
+    xor(right = []) {
+      let result = xorOperation(this.left, right);
+      return operate(result);
+    },
+
+    not() {
+      let result = notOperation(this.left);
+      return operate(result);
+    },
+
+    rcr() {
+      let result = rcrOperation(this.left);
+      return operate(result);
     }
   }
 }
