@@ -40,7 +40,8 @@ function format(arr = [], width = arr.length) {
 
 function operate(arr = []) {
   return {
-    left: arr,
+    left: arr, // lame variable name... this should be deprecated...
+    result: arr, // use this one instead of "left" when querying the result
 
     eql(right = []) {
       let result = eqlOperation(this.left, right);
