@@ -26,7 +26,10 @@ You can also download the latest [zip file](https://github.com/hexrcs/BitFriendl
 // First, require the library, this returns a object with two functions -
 // "bitArray(vals)" for constructing an array of boolean values to represent our binary number...
 // and "operate(arr)" for carrying out bitwise operations and bit shifts
-import {operate, bitArray} from 'bitfriendly'
+const {operate, bitArray} = require ('bitfriendly')
+
+// ... or with ES6 import statement
+// import {operate, bitArray} from 'bitfriendly'
 
 // Pure strings and arrays of mixed 1, 0, true, false are allowed for constructor
 const binaryNumberFromString = bitArray('100101')
